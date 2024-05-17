@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing App</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        #upload-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #preview-container {
+            margin-top: 20px;
+        }
+
+        #preview {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        label:hover {
+            background-color: #2980b9;
+        }
+
+        input[type="submit"] {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #27ae60;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #219d54;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Processing</h1>
+
+    <div id="upload-container">
+        <form id="upload-form" action="/process" method="post" enctype="multipart/form-data">
+            <label for="file" id="upload-label">Choose Image</label>
+            <input type="file" name="file" id="file" accept="image/*" onchange="previewImage(this)">
+            <div id="preview-container">
+                <img id="preview" src="#" alt="Image Preview">
+            </div>
+            <input type="submit" value="Process">
+        </form>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('preview');
+            var uploadLabel = document.getElementById('upload-label');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+                preview.style.display = 'block';
+                uploadLabel.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
