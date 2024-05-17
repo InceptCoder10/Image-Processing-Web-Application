@@ -40,6 +40,5 @@ def process_image():
 
     return send_file(output, mimetype='image/jpeg')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
 
