@@ -20,6 +20,24 @@ def adjust_saturation(image, factor):
 def index():
     return render_template('index.html')
 
+@app.route('/remove', methods=['POST'])
+def remove():
+    if 'file' not in request.files:
+        return "No file part"
+
+    file = request.files['file']
+    if file.filename == '':
+        return "No selected file"
+    
+    img= Image.open(file)
+    output = io.BytesIO()
+    output = remove(img)
+    output.seek(0)
+
+    return send_file(output, mimetype='image/jpeg')
+
+
+
 @app.route('/process', methods=['POST'])
 def process_image():
     if 'file' not in request.files:
@@ -40,5 +58,8 @@ def process_image():
 
     return send_file(output, mimetype='image/jpeg')
 
+#Comment for Deployment file
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
