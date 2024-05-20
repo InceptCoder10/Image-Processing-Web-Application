@@ -78,14 +78,14 @@
     <h1>Image Processing</h1>
 
     <div id="upload-container">
-        <form id="upload-form" action="/process" method="post" enctype="multipart/form-data">
+        <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
             <label for="file" id="upload-label">Choose Image</label>
             <input type="file" name="file" id="file" accept="image/*" onchange="previewImage(this)">
             <div id="preview-container">
                 <img id="preview" src="#" alt="Image Preview">
             </div>
-            <input type="submit" value="Process">
-            <input type="submit" value="Remove">
+            <input type="submit" value="Process" formaction="/process">
+            <input type="submit" value="Remove" formaction="/remove">
 
         </form>
     </div>
